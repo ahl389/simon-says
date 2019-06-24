@@ -1,5 +1,5 @@
 var levels = [{
-	tileCount: 9,
+	tileCount: 2,
     patternLength: 2
 },{
 	tileCount: 4,
