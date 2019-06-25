@@ -31,7 +31,7 @@ class App extends Component {
         } else if (gameStatus === 'NEXT_LEVEL') {
             this.setState({
                 hideGame: true,
-                buttonText: 'next level',
+                buttonText: 'Next Level',
                 lives: 3,
                 level: this.state.level + 1
             });

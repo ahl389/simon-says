@@ -140,10 +140,12 @@ class Level extends Component {
     }
     
     render() {
+		const disabled = this.state.tilesDisabled ? 'disabled' : 'enabled';
+		const classes = `level ${disabled}`;
         return (
             <div className = "game-board">
                 { ! this.state.levelEnded
-                  ? <div className = "level">
+                  ? <div className ={classes}>
 						{ this.props.id == 0
 						  ? <div className = "instructions">
 								Watch the pattern. When you are ready, click the Got It button and then use your mouse to repeat the displayed pattern by clicking on the same tiles in the same order.
@@ -156,7 +158,7 @@ class Level extends Component {
 						
 						{ ! this.state.tilesDisabled
 						  ? ''
-						  : <button className="button gotit" onClick={this.enableTiles}>Got it</button>
+						  : <button className="button gotit" onClick={this.enableTiles}>Got It</button>
 						}
                 	</div>
                   : <button className="button" onClick={this.handleClick}>Try again?</button>
