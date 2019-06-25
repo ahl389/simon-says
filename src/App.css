@@ -66,7 +66,7 @@ body, button {
 	cursor: pointer;
 }
 
-.button:active, .button:focus {
+.button:focus {
     background-color: rgba(145,30,180, 1);
     box-shadow: 5px 5px 8px #666;
 }
@@ -130,7 +130,8 @@ body, button {
 	height: 200px;
 }
 
-.highlight, .enabled .tile:hover, .enabled .tile:active {
+
+.highlight, .tile:active {
     opacity: 1;
     box-shadow: 4px 4px 10px #333;
 }
@@ -150,6 +151,8 @@ body, button {
 	.button {
 		font-size: 18px;
 		padding: 10px 20px;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+		-webkit-tap-highlight-color: transparent;
 	}
 	
 	.gotit {
@@ -163,6 +166,8 @@ body, button {
 	
 	.tile {
 		margin: 6px;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+		-webkit-tap-highlight-color: transparent;
 	}
 	
 	.small {
