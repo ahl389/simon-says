@@ -209,6 +209,7 @@ body, button {
 		margin: 6px;
 		-webkit-tap-highlight-color: rgba(0,0,0,0);
 		-webkit-tap-highlight-color: transparent;
+		transition: all .05s;
 	}
 	
 	.tile:hover, .tile:active {
