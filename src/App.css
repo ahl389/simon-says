@@ -149,7 +149,7 @@ body, button {
 	pointer-events: none;
 }
 
-.highlight, .tile:active {
+.highlight {
     opacity: 1;
     box-shadow: 4px 4px 10px #333;
 }
@@ -212,7 +212,7 @@ body, button {
 		transition: all .05s;
 	}
 	
-	.tile:hover, .tile:active {
+	.tile:active {
 	    opacity: 1;
 	    box-shadow: 4px 4px 10px #333;
 	}
