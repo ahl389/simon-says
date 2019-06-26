@@ -162,7 +162,7 @@ class Level extends Component {
 					
                 		{ this.generateTiles() }
                 	</div>
-				  : <button className="button" onClick={this.handleClick}>Try again?</button> }
+				  : <button className="button tryAgain" onClick={this.handleClick}>Try again?</button> }
             </div>
         )
     }

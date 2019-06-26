@@ -46,13 +46,19 @@ body, button {
     right: 0;
 }
 
-.button {
+
+.interaction, .tryAgain {
     margin: 0 auto;
 	position: absolute;
 	left: 0;
 	right: 0;
 	top: 50%;
 	transform: translateY(-50%);
+	text-align: center;
+	
+}
+
+.button {
 	background-color: rgba(145,30,180, .7);
 	color: white;
 	padding: 15px 25px;
@@ -72,14 +78,16 @@ body, button {
 }
 
 .button.repeat-pattern {
-	width: 35px;
-	height: 35px;
-	top: 15px;
-	transform: translateY(0);
-	border-radius: 100%;
-	padding: 5px;
-	left: auto;
-	right: 15px;
+    width: 35px;
+    height: 35px;
+    top: 15px;
+    transform: translateY(0);
+    border-radius: 100%;
+    padding: 5px;
+    left: auto;
+    right: 15px;
+    position: absolute;
+    font-size: 16px;
 }
 
 .gotit {
@@ -108,9 +116,11 @@ body, button {
 	font-size: 16px;
 }
 
-.interaction {
-	text-align: center;
+
+.message {
+	font-size: 36px;
 }
+
 
 .game-state {
 	color: white;
@@ -149,7 +159,7 @@ body, button {
 	pointer-events: none;
 }
 
-.highlight {
+.highlight, .tile:active {
     opacity: 1;
     box-shadow: 4px 4px 10px #333;
 }
@@ -209,13 +219,13 @@ body, button {
 		margin: 6px;
 		-webkit-tap-highlight-color: rgba(0,0,0,0);
 		-webkit-tap-highlight-color: transparent;
-		transition: all .05s;
+		transition: none;
 	}
 	
-	.tile:active {
+/*	.tile:active {
 	    opacity: 1;
 	    box-shadow: 4px 4px 10px #333;
-	}
+	}*/
 	
 	.small {
 		width: 75px;
