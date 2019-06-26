@@ -149,14 +149,14 @@ body, button {
 	pointer-events: none;
 }
 
-.highlight {
+.highlight, .tile:active {
     opacity: 1;
     box-shadow: 4px 4px 10px #333;
 }
 
-.highlight-tap {
+/*.highlight-tap {
 	animation: highlight .6s;
-}
+}*/
 
 @keyframes highlight {
   0% {
@@ -209,6 +209,11 @@ body, button {
 		margin: 6px;
 		-webkit-tap-highlight-color: rgba(0,0,0,0);
 		-webkit-tap-highlight-color: transparent;
+	}
+	
+	.tile:hover, .tile:active {
+	    opacity: 1;
+	    box-shadow: 4px 4px 10px #333;
 	}
 	
 	.small {
