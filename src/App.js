@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Level from './Level.js';
 import Timer from './Timer.js';
+import Message from './Message.js';
 import levels from './levels.js'
 import './App.css';
 
@@ -24,6 +25,8 @@ class App extends Component {
         if (gameStatus === 'NEW_GAME') {
             this.setState({
                 hideGame: true,
+				showMessage: true,
+				messageContent: 'Game Over',
                 buttonText: 'Play Again?',
                 lives: 3,
                 level: 0
@@ -31,6 +34,8 @@ class App extends Component {
         } else if (gameStatus === 'NEXT_LEVEL') {
             this.setState({
                 hideGame: true,
+				showMessage: true,
+				messageContent: 'Congratulations!',
                 buttonText: 'Next Level',
                 lives: 3,
                 level: this.state.level + 1
@@ -65,16 +70,22 @@ class App extends Component {
         const increaseLevel = this.increaseLevel;
         const livesDisplay = this.state.lives > 1 ? `${this.state.lives} lives remaining` : `${this.state.lives} life remaining`
         const levelDisplay = `Level ${this.state.level + 1} `
-        
+        const showMessage = this.state.showMessage;
 
         return (
             <div className = "game">
                 { this.state.hideGame 
-                  ?	<button
-                		className="button"
-                		onClick={this.handleClick}>
-                        { this.state.buttonText }
-                 	</button>
+                  ?	<div className="interaction">
+						{ showMessage
+						  ? <Message content={this.state.messageContent}/>
+						  : '' }
+					  
+						<button
+	                		className="button"
+	                		onClick={this.handleClick}>
+	                        { this.state.buttonText }
+	                 	</button>
+					</div>
                 
             	  : <div className = "play-area">
                         <div className = "game-state">
@@ -83,13 +94,13 @@ class App extends Component {
                         </div>
                         
                         <Level 
-                		id={this.state.level}
-                		tileCount={levels[this.state.level].tileCount}
-                        patternLength={levels[this.state.level].patternLength}
-                        colors={this.state.colors}
-                        removeLife={removeLife.bind(this)}
-                        increaseLevel={increaseLevel.bind(this)}
-                		/>
+	                		id={this.state.level}
+	                		tileCount={levels[this.state.level].tileCount}
+	                        patternLength={levels[this.state.level].patternLength}
+	                        colors={this.state.colors}
+	                        removeLife={removeLife.bind(this)}
+	                        increaseLevel={increaseLevel.bind(this)}
+	                		/>
                     </div>
                 }
             </div>

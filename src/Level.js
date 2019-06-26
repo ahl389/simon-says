@@ -1,46 +1,38 @@
 import React, { Component } from 'react';
 import Tile from './Tile.js';
-
+import Message from './Message.js';
+import Instructions from './Instructions.js';
 
 class Level extends Component {
     constructor(props) {
 		super(props);
         
 		this.state = {
-			levelEnded: false,
-            clickCount: 0,
-			tilesDisabled: true
+			levelFailed: false,
+            clickCount: 0
 		};
         
-        this.tiles = [];
         this.pattern = this.createPattern();
-        this.userPattern = [];
         this.showPattern = this.showPattern.bind(this);
         this.handleClick = this.handleClick.bind(this);
-		this.enableTiles = this.enableTiles.bind(this);
     }
     
     componentDidMount() {
         this.showPattern();
     }
     
-    componentDidUpdate() {
-        if (this.state.tilesDisabled) {
-            this.showPattern();
-        }
-    }
-    
-	set tilesDisabled(disabled) {
-		this.setState({
-			tilesDisabled: false
-		});
-	}
-	
+ 		//    componentDidUpdate() {
+		//         if (this.state.clickCount === 0) {
+		//             this.showPattern();
+		// }
+		//     }
+		//
+
     createPattern() {
         const pattern = [];
         
         for (let i = 0; i < this.props.patternLength; i++) {
-            pattern.push(Math.ceil(Math.random() * this.props.tileCount - 1));
+            pattern.push(Math.round(Math.random() * (this.props.tileCount - 1)));
         }
         
         return pattern;
@@ -62,7 +54,6 @@ class Level extends Component {
                         pattern={this.pattern}
                         comparePattern={this.comparePattern.bind(this)}
 						totalTiles={this.props.tileCount}
-						disabled={this.state.tilesDisabled}
 					    />
 			);
 			
@@ -74,26 +65,25 @@ class Level extends Component {
     
     handleClick() {
         this.setState({
-            levelEnded: false,
-			tilesDisabled: true,
-            clickCount: 0
+            levelFailed: false,
+            clickCount: 0,
+			showRepeatButton: true
         });
     }
 	
-	enableTiles() {
-		this.setState({
-			tilesDisabled: false
-		});
-	}
-    
     showPattern() {
         let i = 0;
         let level = this;
- 	   	var help;
+		
+		this.setState({
+			showRepeatButton: false
+		});
+		
+		document.querySelector('.game').classList.add('disabled');
 		
         setTimeout(function() {
-            help = highlightTile(i);
-        }, 1250);
+            highlightTile(i);
+        }, 1000);
 		
         function highlightTile(i) {
             if (i < level.pattern.length) {
@@ -113,56 +103,66 @@ class Level extends Component {
                     }, 700);
                 }
             } else {
-            	return 'done!'
+            	document.querySelector('.game').classList.remove('disabled');
             } 
         }
     }
 	 
-    comparePattern(id) {        
-        if (this.state.clickCount < this.pattern.length - 1) {    
-            if (this.pattern[this.state.clickCount] !== id) {
-                this.setState({
-                    levelEnded: true,
-                    clickCount: this.state.clickCount + 1
-                });
-                
-                const removeLife = this.props.removeLife;
-                removeLife();
-            } else {
-                this.setState({
-                    clickCount: this.state.clickCount + 1
-                });
-            }
+    comparePattern(id) {  
+        if (this.pattern[this.state.clickCount] !== id) {
+			this.levelFailed();
         } else {
-            const increaseLevel = this.props.increaseLevel;
-            increaseLevel();
+			this.correctlyGuessedTile(); 
         }
     }
-    
+	
+	levelFailed() {
+		const removeLife = this.props.removeLife;
+		
+        this.setState({
+            levelFailed: true,
+            clickCount: this.state.clickCount + 1
+        });
+		
+		setTimeout(function(){
+            removeLife();
+		}, 600);
+	}
+	
+	correctlyGuessedTile() {
+		if (this.state.clickCount < this.pattern.length - 1) {
+            this.setState({
+                clickCount: this.state.clickCount + 1
+            });
+		} else {
+			const increaseLevel = this.props.increaseLevel;
+		
+			setTimeout(function(){
+	            increaseLevel();
+			}, 600);
+		}
+	}
+	
     render() {
-		const disabled = this.state.tilesDisabled ? 'disabled' : 'enabled';
-		const classes = `level ${disabled}`;
+		const showRepeatButton = this.state.showRepeatButton;
+		const showInstructions = this.props.id === 0 || this.state.showInstructions;
+		
         return (
             <div className = "game-board">
-                { ! this.state.levelEnded
-                  ? <div className ={classes}>
-						{ this.props.id == 0
-						  ? <div className = "instructions">
-								Watch the pattern. When you are ready, click the Got It button and then use your mouse to repeat the displayed pattern by clicking on the same tiles in the same order.
-							</div>
-						  : ''
-						}
-						
+				{ showRepeatButton
+				  ? <button className="button repeat-pattern" onClick={this.showPattern}><i class="fas fa-redo"></i></button>
+				  : ''	}
+				
+                { ! this.state.levelFailed
+                  ? <div className="level">
+
+  						{ showInstructions
+  						  ? <Instructions/>
+  						  : '' }
 					
                 		{ this.generateTiles() }
-						
-						{ ! this.state.tilesDisabled
-						  ? ''
-						  : <button className="button gotit" onClick={this.enableTiles}>Got It</button>
-						}
                 	</div>
-                  : <button className="button" onClick={this.handleClick}>Try again?</button>
-                }
+				  : <button className="button" onClick={this.handleClick}>Try again?</button> }
             </div>
         )
     }

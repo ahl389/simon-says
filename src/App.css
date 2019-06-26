@@ -66,9 +66,20 @@ body, button {
 	cursor: pointer;
 }
 
-.button:focus {
+.button:active {
     background-color: rgba(145,30,180, 1);
     box-shadow: 5px 5px 8px #666;
+}
+
+.button.repeat-pattern {
+	width: 35px;
+	height: 35px;
+	top: 15px;
+	transform: translateY(0);
+	border-radius: 100%;
+	padding: 5px;
+	left: auto;
+	right: 15px;
 }
 
 .gotit {
@@ -90,11 +101,15 @@ body, button {
 	margin-top: -55px;
 }
 
-.instructions {
+.instructions, .message {
 	color: white;
 	font-weight: 300;
 	margin-bottom: 50px;
 	font-size: 16px;
+}
+
+.interaction {
+	text-align: center;
 }
 
 .game-state {
@@ -130,10 +145,36 @@ body, button {
 	height: 200px;
 }
 
+.disabled {
+	pointer-events: none;
+}
 
-.highlight, .tile:active {
+.highlight {
     opacity: 1;
     box-shadow: 4px 4px 10px #333;
+}
+
+.highlight-tap {
+	animation: highlight .6s;
+}
+
+@keyframes highlight {
+  0% {
+      opacity: .6;
+      box-shadow: 3px 3px 6px #777;
+  }
+  25% {
+      opacity: 1;
+      box-shadow: 4px 4px 10px #333;
+  }
+  75% {
+      opacity: 1;
+      box-shadow: 4px 4px 10px #333;
+  }
+  100% {
+      opacity: .6;
+      box-shadow: 3px 3px 6px #777;
+  }
 }
 
 @media (max-width: 480px) {
