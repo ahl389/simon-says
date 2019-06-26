@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/simon-says/static/css/main.3ee4f5f5.chunk.css",
+    "main.css": "/simon-says/static/css/main.6bd41498.chunk.css",
     "main.js": "/simon-says/static/js/main.1b0d18fa.chunk.js",
     "main.js.map": "/simon-says/static/js/main.1b0d18fa.chunk.js.map",
     "runtime~main.js": "/simon-says/static/js/runtime~main.4578f539.js",
@@ -8,8 +8,8 @@
     "static/js/2.2668f2aa.chunk.js": "/simon-says/static/js/2.2668f2aa.chunk.js",
     "static/js/2.2668f2aa.chunk.js.map": "/simon-says/static/js/2.2668f2aa.chunk.js.map",
     "index.html": "/simon-says/index.html",
-    "precache-manifest.237214f030fadafdd5a3573bc40e2ff3.js": "/simon-says/precache-manifest.237214f030fadafdd5a3573bc40e2ff3.js",
+    "precache-manifest.276d719611c503569f54496b10bdc198.js": "/simon-says/precache-manifest.276d719611c503569f54496b10bdc198.js",
     "service-worker.js": "/simon-says/service-worker.js",
-    "static/css/main.3ee4f5f5.chunk.css.map": "/simon-says/static/css/main.3ee4f5f5.chunk.css.map"
+    "static/css/main.6bd41498.chunk.css.map": "/simon-says/static/css/main.6bd41498.chunk.css.map"
   }
 }
